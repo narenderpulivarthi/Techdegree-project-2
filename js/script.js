@@ -14,6 +14,7 @@ For assistance:
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
+document.addEventListener("DOMContentLoaded", () => {
 let itemsPerPage = 9; // The number of student items to be displayed on a single page i.e 9.(Note: Global Scope.)
 function showPage(list, page) {
    let startIndex = (page * itemsPerPage) - itemsPerPage; // represents the index for the first student on the page
@@ -51,12 +52,12 @@ function addPagination(list) {
    for (let i = 0; i < numOfPages; i++){ // loop over the number of pages needed
       linkList.insertAdjacentHTML("beforeend", 
       `<li>
-         <button type="button">${i + 1}</button>
+         <button type="button" class="pg-btn">${i + 1}</button>
       </li>
       `);
    }
-   const button = document.querySelector('button'); // select the button element
-   button.className = 'active'; // assign a class named 'active' to the first button
+   const pageButton = document.querySelector(".pg-btn");// select the button element 
+   pageButton.className = 'active'; // assign a class named 'active' to the first button
    linkList.addEventListener('click', (e) => { // The 'active' Class is reassigned to the target button
       if(e.target.tagName === 'BUTTON'){
          document.querySelector('.active').className = '';
@@ -99,28 +100,26 @@ label.appendChild(createHtmlElements('span', 'textContent', 'Search by name'));
 const input = createHtmlElements('input', 'placeholder', 'Search by name...');
 input.id = "search";
 label.appendChild(input); // appending input to label element
-const button = createHtmlElements('button', 'type', 'button');
-button.id = "search-button";
-button.innerHTML = `<img src="img/icn-search.svg" alt="Search icon">`;
-label.appendChild(button); // appending button to label element
+const searchButton = createHtmlElements('button', 'type', 'button');
+searchButton.id = "search-button";
+searchButton.innerHTML = `<img src="img/icn-search.svg" alt="Search icon">`;
+label.appendChild(searchButton); // appending button to label element
 
 
 
 /*
 Adding functionality to the search bar
 */
-const ul = document.querySelector('.student-list');
+
 const search = document.querySelector('#search');  // Search bar 'input' is selected and assigned to search variable
-const searchButton = document.querySelector('#search-button'); // search 'button' is selected and assigned to searchButton variable
-// const ul = document.querySelector('.student-list'); // selecting the ul element with class name 'student-list' to append future elements
+const ul = document.querySelector('.student-list'); // selecting the ul element with class name 'student-list' to append future elements
 function performSearch(list){ // created a function performSearch with its parameter list.
    let newList = []; // create an empty array named newList
    const searchInput = search.value.toLowerCase(); // store the search value with lowercase in searchInput variable
    for(let i = 0; i < list.length; i++) { // loop over all the students list
       let names = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`; // assigning a string using template literal to names variable
       if(searchInput.value != 0 && names.includes(searchInput)){ //Check any matching names from the students list
-         newList.push(list[i]); // assign all the matching studentlist to an array named 'newList'
-         console.log(newList);        
+         newList.push(list[i]); // assign all the matching studentlist to an array named 'newList'       
       }
       showPage(newList, 1); // calling the showPage function to display the new list of students
       addPagination(newList); // calling the addPagination function to display the page buttons based on the new list of students
@@ -138,7 +137,10 @@ searchButton.addEventListener('click', (event) => { // Event listener when searc
    event.preventDefault(); // remove default settings of the click event
    performSearch(data);   // calling the performSearch function
 });
-   
-search.addEventListener('keyup', () => { // Event listener dynamically/ real time search based on the keyboard entry: suggested in the project instructions
-   performSearch(data); // calling the performSearch function   
+const studentSearch = document.querySelector('.student-search')
+studentSearch.addEventListener('keyup', (event) => { // Event listener dynamically/ real time search based on the keyboard entry: suggested in the project instructions
+   if(event.target.tagName == 'INPUT'){
+      performSearch(data); // calling the performSearch function 
+   }  
+});
 });
