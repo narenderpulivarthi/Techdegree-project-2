@@ -83,19 +83,23 @@ header.insertAdjacentHTML("beforeend",  // Adding the search bar to the DOM elem
       <button type="button" id = "search-button"><img src="img/icn-search.svg" alt="Search icon"></button>
    </label>`
    );
+
+
 /*
 Adding functionality to the search bar
 */
+const ul = document.querySelector('.student-list');
 const search = document.querySelector('#search');  // Search bar 'input' is selected and assigned to search variable
 const searchButton = document.querySelector('#search-button'); // search 'button' is selected and assigned to searchButton variable
-const ul = document.querySelector('.student-list'); // selecting the ul element with class name 'student-list' to append future elements
+// const ul = document.querySelector('.student-list'); // selecting the ul element with class name 'student-list' to append future elements
 function performSearch(list){ // created a function performSearch with its parameter list.
    let newList = []; // create an empty array named newList
    const searchInput = search.value.toLowerCase(); // store the search value with lowercase in searchInput variable
    for(let i = 0; i < list.length; i++) { // loop over all the students list
       let names = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`; // assigning a string using template literal to names variable
       if(searchInput.value != 0 && names.includes(searchInput)){ //Check any matching names from the students list
-         newList.push(list[i]); // assign all the matching studentlist to an array named 'newList'        
+         newList.push(list[i]); // assign all the matching studentlist to an array named 'newList'
+         console.log(newList);        
       }
       showPage(newList, 1); // calling the showPage function to display the new list of students
       addPagination(newList); // calling the addPagination function to display the page buttons based on the new list of students
@@ -103,7 +107,7 @@ function performSearch(list){ // created a function performSearch with its param
          let h1 = document.createElement('h1'); // create h1 element in the DOM
          h1.textContent = "No results found :("; // h1 textContent
          h1.style.fontSize = "32px"; 
-;         ul.appendChild(h1); // append the h1 element to display the h1 element
+         ul.appendChild(h1); // append the h1 element to display the h1 element
 
       }
    }
