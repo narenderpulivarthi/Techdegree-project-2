@@ -75,14 +75,35 @@ addPagination(data); // Call functions addPagination()
 */
 
 const header = document.querySelector('.header'); // accessing/selecting the header class
-header.insertAdjacentHTML("beforeend",  // Adding the search bar to the DOM elements
+
+// Example of search bar with mix of JavaScript and HTML  Note: for testing purpose.
+/* header.insertAdjacentHTML("beforeend",
    `
    <label for="search" class="student-search">
       <span>Search by name</span>
       <input id="search" placeholder="Search by name..."> 
       <button type="button" id = "search-button"><img src="img/icn-search.svg" alt="Search icon"></button>
    </label>`
-   );
+); */
+
+function createHtmlElements(elementName, property, value){ // created a function to create HTML elements along with its properties and values
+   const element = document.createElement(elementName);
+   element[property] = value;   
+   return element;
+}
+
+const label = createHtmlElements('label', 'for', 'search');
+label.className = "student-search";
+header.appendChild(label); // appending label to header element
+label.appendChild(createHtmlElements('span', 'textContent', 'Search by name'));
+const input = createHtmlElements('input', 'placeholder', 'Search by name...');
+input.id = "search";
+label.appendChild(input); // appending input to label element
+const button = createHtmlElements('button', 'type', 'button');
+button.id = "search-button";
+button.innerHTML = `<img src="img/icn-search.svg" alt="Search icon">`;
+label.appendChild(button); // appending button to label element
+
 
 
 /*
