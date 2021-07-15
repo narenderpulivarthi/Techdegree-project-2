@@ -17,6 +17,7 @@ For assistance:
  * The list parameter represent student data that will be passed as an argument
  * The page parameter represent the page number.
  * List items per page is 9.
+ * the default page is 1.
  */
 const header = document.querySelector('header'); // Global variable.
 
@@ -47,6 +48,8 @@ function showPage(list, page){
  * Create the `addPagination` function
  * This function will create and insert/append the elements needed for the pagination buttons
  * list parameter represent student data.
+ * If the list is empty the 'no results found' message is displayed on the screen
+ * Based on the list, the required number of buttons are displayed.
 */
 
 function addPagination(list) {
@@ -95,6 +98,7 @@ addPagination(data); // called the function addPagination with data as argument.
  * elementName : The element which is being created in the DOM.
  * property : That particular element's property which can be 'an attribute key' or 'content property'.
  * value : The value of that element's property.
+ * When the function is called, the elements are set along with its attributes and content.
  */
 
 
@@ -131,22 +135,23 @@ header.addEventListener('keyup', (e) => {
    }
 });
 
-/* 
-   1. 'click' event listener is added
-   2. It is triggered only when the button on search bar with 'search-button' id is clicked.
-   3. added a conditional statement to target only the event element, preventing 
-   the element's hierarchy to bubble up and trigger other unnecessary events. (Event Bubbling concept implemented)
-*/
+/**
+ * 'click' event listener is added
+ * It is triggered only when the button on search bar with 'search-button' id is clicked.
+ * added a conditional statement to target only the event element, preventing 
+ * the element's hierarchy to bubble up and trigger other unnecessary events. (Event Bubbling concept implemented)
+ */
 header.addEventListener('click', (e) => { 
    e.preventDefault(); 
    if(e.target.id === 'search-button'){ 
       performSearch(data); // calling the performSearch function if the condition is satisfied.
    }  
 });
-/* 
-   1. performSearch function is set along with its parameter 'list';
-   2. list parameter takes in the student list from data.js
-*/
+/**
+ * performSearch function is set along with its parameter 'list'
+ * list parameter takes in the student list from data.js
+ * performSearch function generates names based on the search input
+ */ 
 
 function performSearch(list){
    const search = document.querySelector('#search');
@@ -156,7 +161,7 @@ function performSearch(list){
    for(let i = 0; i < list.length; i++){ // run the list over the loop
       searchName = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`;
       // based on the list index the student name is selected and stored in searchName.    
-      if(searchInput !== 0 && searchName.includes(searchInput)){   
+      if(searchInput.length !== 0 && searchName.includes(searchInput)){   
       // if the  input value is not empty and the searchName string has input character     
          searchList.push(list[i]); // then push that list items into the  searchList array
       }else if (searchInput.length === 0){ // if input value is empty, show the default page.
@@ -169,4 +174,4 @@ function performSearch(list){
    addPagination(searchList); 
 }
 
-/* The End */
+/** The End */ 
