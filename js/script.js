@@ -162,9 +162,9 @@ function performSearch(list){
       searchName = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`;
       // based on the list index the student name is selected and stored in searchName.    
       if(searchInput.length !== 0 && searchName.includes(searchInput)){   
-      // if the  input value is not empty and the searchName string has input character     
+      // if the  input length is not empty and the searchName string has input character     
          searchList.push(list[i]); // then push that list items into the  searchList array
-      }else if (searchInput.length === 0){ // if input value is empty, show the default page.
+      }else if (searchInput.length === 0){ // if input length is empty, show the default page.
          showPage(data, 1); 
          addPagination(data); 
          return; // return without going further into the performSearch function.
