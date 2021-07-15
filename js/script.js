@@ -1,24 +1,24 @@
 
-/*
+/**
 Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
 
-/*
+/** 
 For assistance:
    Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
    Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
 */
-const header = document.querySelector('header'); // Global variable.
-/*
-Create the `showPage` function with two parameters 'list' and 'page'.
-1. This function will create and insert/append the elements needed to display a "page" of nine students
-2. The list parameter represent student data that will be passed as an argument
-3. The page parameter represent the page number.
-4. List items per page is 9.
-*/
 
+/**
+ * Create the `showPage` function with two parameters 'list' and 'page'.
+ * This function will create and insert/append the elements needed to display a "page" of nine students
+ * The list parameter represent student data that will be passed as an argument
+ * The page parameter represent the page number.
+ * List items per page is 9.
+ */
+const header = document.querySelector('header'); // Global variable.
 
 function showPage(list, page){ 
    let startIndex = (page * 9) - 9; // the index of the list to be displayed as first item on the given page.
@@ -43,10 +43,10 @@ function showPage(list, page){
    }
 }
 
-/*
-Create the `addPagination` function
-1. This function will create and insert/append the elements needed for the pagination buttons
-2. list parameter represent student data.
+/** 
+ * Create the `addPagination` function
+ * This function will create and insert/append the elements needed for the pagination buttons
+ * list parameter represent student data.
 */
 
 function addPagination(list) {
@@ -90,12 +90,13 @@ addPagination(data); // called the function addPagination with data as argument.
 /* Extra Credits */
 
 
-/* 
-Created a function 'createHtmlElements' with parameters: 
-1. elementName : The element which is being created in the DOM.
-2. property : That particular element's property which can be 'an attribute key' or 'content property'
-3. value : The value of that element's property.
-*/
+/**
+ * Created a function 'createHtmlElements' with parameters: 
+ * elementName : The element which is being created in the DOM.
+ * property : That particular element's property which can be 'an attribute key' or 'content property'.
+ * value : The value of that element's property.
+ */
+
 
 function createHtmlElements(elementName, property, value){ 
    const element = document.createElement(elementName);
@@ -115,13 +116,14 @@ searchButton.id = "search-button"; // An id is given to the button element
 searchButton.innerHTML = `<img src="img/icn-search.svg" alt="Search icon">`; // button's innerHTML
 label.appendChild(searchButton); // button is linked as child to label within DOM.
 
-/* 
-   1. 'keyup' event listener is added
-   2. It is triggered only when the input element with 'search' id has input of keyboard
-   3. added a conditional statement to target only the event element, preventing 
-   the element's hierarchy to bubble up and trigger other unnecessary events. (Event Bubbling concept implemented)
-   4. It is helpful in real-time search i.e search dynamically
-*/
+/**
+ * 'keyup' event listener is added
+ * It is triggered only when the input element with 'search' id has input of keyboard
+ * added a conditional statement to target only the event element, preventing the element's hierarchy to bubble up
+   and trigger other unnecessary events. (Event Bubbling concept implemented)
+ * It is helpful in real-time search i.e search dynamically
+ */
+
 header.addEventListener('keyup', (e) => { 
    e.preventDefault(); // preventing the default settings to generate unnecessary functionality
    if(e.target.id === 'search'){
